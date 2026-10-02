@@ -18,12 +18,6 @@ cd GradeTracker
 python main.py
 ```
 
-If a function requires a category, there are three options:
-
-1. homework
-2. quiz
-3. exam
-
 The program has 6 operable functions:
 
 ### add
@@ -41,9 +35,9 @@ It requires class name as an input.
 
 ### calculate
 
-This function return the grade average for a specified class.
+This function returns the grade average for a specified class.
 
-Cannot calculate without a homework, quiz, AND exam in the class.
+Any categories with no assignments are assumed to be 100%
 
 It requires class name as an input.
 
@@ -61,4 +55,4 @@ It requires class name and assignment name as an input.
 
 ### exit
 
-This function lets you exit the function.
+exit terminates the function.
