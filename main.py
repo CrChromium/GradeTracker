@@ -1,19 +1,17 @@
 import json
 
-def load_grades():
+def load_grades(): #Loads the grades from the JSON file
     try:
         with open('grades.json', 'r') as file:
             return json.load(file)
     except FileNotFoundError:
         return {}
 
-def save_grades(grades):
+def save_grades(grades): #Saves the grades to the JSON file
     with open('grades.json', 'w') as file:
         json.dump(grades, file, indent=4)
 
-grades = load_grades()
-
-def add_grade(name, category, grade, class_name):
+def add_grade(name, category, grade, class_name): #Adds a grade to the specified class
     grades[class_name].append({
         "name": name,
         "category": category,
@@ -21,7 +19,7 @@ def add_grade(name, category, grade, class_name):
     })
     save_grades(grades)
 
-def add_class(class_name):
+def add_class(class_name): #Adds a new class to the grades dictionary
     if class_name not in grades:
         grades[class_name] = []
         save_grades(grades)
@@ -29,14 +27,15 @@ def add_class(class_name):
     else:
         print(f"Class '{class_name}' already exists.")
 
-HomeworkPercent = 0.2
+grades = load_grades()
+HomeworkPercent = 0.2 #The percent that each category is worth in the final grade
 ExamPercent = 0.5
 QuizPercent = 0.3
 Operable = True
 
 while Operable:
     operation = input("Enter 'add' to add grades, 'add_class' to add a class, 'calculate' to calculate the average, 'view' to print grades, 'remove' to remove a grade, or 'exit' to leave: ")
-    if operation == 'add':
+    if operation == 'add': #Adds a grade to the specified class
         grade_amount = int(input("Enter the number of assignments you want to add: "))
 
         if grade_amount > 0:
@@ -47,11 +46,11 @@ while Operable:
                 grade_input = float(input("Enter the assignment grade: "))
                 add_grade(name_input, category_input, grade_input, class_name)
 
-    if operation == 'add_class':
+    if operation == 'add_class': #Adds a new class to the grades dictionary
         class_name = input("Enter the class name to add: ")
         add_class(class_name)
 
-    if operation == 'calculate':
+    if operation == 'calculate': #Calculates the average grade for the specified class
         class_name = input("Enter the class name: ")
 
         HomeworkAvg = sum(grade['grade'] for grade in grades[class_name] if grade['category'] == 'homework') / len([grade for grade in grades[class_name] if grade['category'] == 'homework'])
@@ -61,12 +60,12 @@ while Operable:
         GradeAvg = round((HomeworkAvg * HomeworkPercent) + (ExamAvg * ExamPercent) + (QuizAvg * QuizPercent), 2)
         print(f"{class_name} grade = {GradeAvg}")
 
-    if operation == 'view':
+    if operation == 'view': #Prints all the grades for the specified class
         class_name = input("Enter the class name: ")
         for grade in grades[class_name]:
             print(f"Name: {grade['name']}, Category: {grade['category']}, Grade: {grade['grade']}")
 
-    if operation == 'remove':
+    if operation == 'remove': #Removes a grade from the specified class
         class_name = input("Enter the class name: ")
         assignment_name = input("Enter the assignment name to remove: ")
         grades[class_name] = [grade for grade in grades[class_name] if grade['name'] != assignment_name]
@@ -74,8 +73,8 @@ while Operable:
         print(f"Removed assignment '{assignment_name}' from {class_name}.")
 
     else:
-        if operation == 'exit':
+        if operation == 'exit': #Exits the program
             Operable = False
             print("Exiting the program.")
         if operation not in ['add', 'add_class', 'calculate', 'view', 'remove', 'exit']:
-            print("Invalid operation. Please try again.")
+            print("Invalid operation. Please try again.") #Error message for invalid operation

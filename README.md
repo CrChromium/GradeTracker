@@ -43,6 +43,8 @@ It requires class name as an input.
 
 This function return the grade average for a specified class.
 
+Cannot calculate without a homework, quiz, AND exam in the class.
+
 It requires class name as an input.
 
 ### view
