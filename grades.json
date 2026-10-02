@@ -1,0 +1,39 @@
+{
+    "Math": [
+        {
+            "name": "Homework 1",
+            "category": "homework",
+            "grade": 95
+        },
+        {
+            "name": "Homework 2",
+            "category": "homework",
+            "grade": 90
+        },
+        {
+            "name": "Quiz 1",
+            "category": "quiz",
+            "grade": 85
+        },
+        {
+            "name": "Quiz 2",
+            "category": "quiz",
+            "grade": 80
+        },
+        {
+            "name": "Midterm Exam",
+            "category": "exam",
+            "grade": 88
+        },
+        {
+            "name": "Final Exam",
+            "category": "exam",
+            "grade": 92
+        },
+        {
+            "name": "Homework 3",
+            "category": "homework",
+            "grade": 95.0
+        }
+    ]
+}
