@@ -13,13 +13,21 @@ def save_grades(grades):
 
 grades = load_grades()
 
-def add_grade(name, category, grade):
-    grades['Math'].append({
+def add_grade(name, category, grade, class_name):
+    grades[class_name].append({
         "name": name,
         "category": category,
         "grade": grade
     })
     save_grades(grades)
+
+def add_class(class_name):
+    if class_name not in grades:
+        grades[class_name] = []
+        save_grades(grades)
+        print(f"Class '{class_name}' added.")
+    else:
+        print(f"Class '{class_name}' already exists.")
 
 HomeworkPercent = 0.2
 ExamPercent = 0.5
@@ -27,16 +35,21 @@ QuizPercent = 0.3
 Operable = True
 
 while Operable:
-    operation = input("Enter 'add' to add grades, 'calculate' to calculate the average, 'view' to print grades, 'remove' to remove a grade, or 'exit' to leave: ")
+    operation = input("Enter 'add' to add grades, 'add_class' to add a class, 'calculate' to calculate the average, 'view' to print grades, 'remove' to remove a grade, or 'exit' to leave: ")
     if operation == 'add':
         grade_amount = int(input("Enter the number of assignments you want to add: "))
 
         if grade_amount > 0:
             for _ in range(grade_amount):
+                class_name = input("Enter the class name: ")
                 name_input = input("Enter the assignment name: ")
                 category_input = input("Enter the assignment category: ")
                 grade_input = float(input("Enter the assignment grade: "))
-                add_grade(name_input, category_input, grade_input)
+                add_grade(name_input, category_input, grade_input, class_name)
+
+    if operation == 'add_class':
+        class_name = input("Enter the class name to add: ")
+        add_class(class_name)
 
     if operation == 'calculate':
         class_name = input("Enter the class name: ")
@@ -64,5 +77,5 @@ while Operable:
         if operation == 'exit':
             Operable = False
             print("Exiting the program.")
-        if operation not in ['add', 'calculate', 'view', 'remove', 'exit']:
+        if operation not in ['add', 'add_class', 'calculate', 'view', 'remove', 'exit']:
             print("Invalid operation. Please try again.")

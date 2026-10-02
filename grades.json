@@ -15,5 +15,27 @@
             "category": "exam",
             "grade": 94.0
         }
+    ],
+    "English": [
+        {
+            "name": "Homework 1",
+            "category": "homework",
+            "grade": 83.0
+        },
+        {
+            "name": "Homework 2",
+            "category": "homework",
+            "grade": 91.0
+        },
+        {
+            "name": "Exam 1",
+            "category": "exam",
+            "grade": 95.0
+        },
+        {
+            "name": "Quiz 1",
+            "category": "quiz",
+            "grade": 92.0
+        }
     ]
 }
