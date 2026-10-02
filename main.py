@@ -70,10 +70,13 @@ while operable:
     elif operation == 'calculate': #Calculates the average grade for the specified class
         class_name = input("Enter the class name: ")
         try:
+            other_total = 0
+            other_sum = 0
             for category in grades[class_name]: #Checks for categories that are not traditional
                 if category['category'] not in ['homework', 'exam', 'quiz']:
-                    other_avg = calculate_average(category['category'], class_name)
-            
+                    other_total += 1
+                    other_sum += category['grade']
+            other_avg = other_sum / other_total if other_total > 0 else 100.0
             homework_avg = calculate_average('homework', class_name)
             exam_avg = calculate_average('exam', class_name)
             quiz_avg = calculate_average('quiz', class_name)

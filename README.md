@@ -37,7 +37,12 @@ It requires class name as an input.
 
 This function returns the grade average for a specified class.
 
-Any categories with no assignments are assumed to be 100%
+Each category is weighted separately:
+
+Homework = 20%
+Exams = 45%
+Quizzes = 25%
+Other = 10%
 
 It requires class name as an input.
 
@@ -55,4 +60,4 @@ It requires class name and assignment name as an input.
 
 ### exit
 
-exit terminates the function.
+exit terminates the program.
