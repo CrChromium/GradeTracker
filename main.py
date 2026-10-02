@@ -24,18 +24,45 @@ def add_grade(name, category, grade):
 HomeworkPercent = 0.2
 ExamPercent = 0.5
 QuizPercent = 0.3
+Operable = True
 
-grade_amount = int(input("Enter the number of assignments you want to add: "))
-if grade_amount > 0:
-    for _ in range(grade_amount):
-        name_input = input("Enter the assignment name: ")
-        category_input = input("Enter the assignment category: ")
-        grade_input = float(input("Enter the assignment grade: "))
-        add_grade(name_input, category_input, grade_input)
+while Operable:
+    operation = input("Enter 'add' to add grades, 'calculate' to calculate the average, 'view' to print grades, 'remove' to remove a grade, or 'exit' to leave: ")
+    if operation == 'add':
+        grade_amount = int(input("Enter the number of assignments you want to add: "))
 
-HomeworkAvg = sum(grade['grade'] for grade in grades['Math'] if grade['category'] == 'homework') / len([grade for grade in grades['Math'] if grade['category'] == 'homework'])
-ExamAvg = sum(grade['grade'] for grade in grades['Math'] if grade['category'] == 'exam') / len([grade for grade in grades['Math'] if grade['category'] == 'exam'])
-QuizAvg = sum(grade['grade'] for grade in grades['Math'] if grade['category'] == 'quiz') / len([grade for grade in grades['Math'] if grade['category'] == 'quiz'])
+        if grade_amount > 0:
+            for _ in range(grade_amount):
+                name_input = input("Enter the assignment name: ")
+                category_input = input("Enter the assignment category: ")
+                grade_input = float(input("Enter the assignment grade: "))
+                add_grade(name_input, category_input, grade_input)
 
-GradeAvg = round((HomeworkAvg * HomeworkPercent) + (ExamAvg * ExamPercent) + (QuizAvg * QuizPercent), 2)
-print("Math grade = ", GradeAvg)
+    if operation == 'calculate':
+        class_name = input("Enter the class name: ")
+
+        HomeworkAvg = sum(grade['grade'] for grade in grades[class_name] if grade['category'] == 'homework') / len([grade for grade in grades[class_name] if grade['category'] == 'homework'])
+        ExamAvg = sum(grade['grade'] for grade in grades[class_name] if grade['category'] == 'exam') / len([grade for grade in grades[class_name] if grade['category'] == 'exam'])
+        QuizAvg = sum(grade['grade'] for grade in grades[class_name] if grade['category'] == 'quiz') / len([grade for grade in grades[class_name] if grade['category'] == 'quiz'])
+
+        GradeAvg = round((HomeworkAvg * HomeworkPercent) + (ExamAvg * ExamPercent) + (QuizAvg * QuizPercent), 2)
+        print(f"{class_name} grade = {GradeAvg}")
+
+    if operation == 'view':
+        class_name = input("Enter the class name: ")
+        for grade in grades[class_name]:
+            print(f"Name: {grade['name']}, Category: {grade['category']}, Grade: {grade['grade']}")
+
+    if operation == 'remove':
+        class_name = input("Enter the class name: ")
+        assignment_name = input("Enter the assignment name to remove: ")
+        grades[class_name] = [grade for grade in grades[class_name] if grade['name'] != assignment_name]
+        save_grades(grades)
+        print(f"Removed assignment '{assignment_name}' from {class_name}.")
+
+    else:
+        if operation == 'exit':
+            Operable = False
+            print("Exiting the program.")
+        if operation not in ['add', 'calculate', 'view', 'remove', 'exit']:
+            print("Invalid operation. Please try again.")
