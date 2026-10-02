@@ -18,6 +18,45 @@ cd GradeTracker
 python main.py
 ```
 
-The program asks for the number of assignments you want to add, the name of each assignment, the category of each assignment, and the grade for each assignment.
+If a function requires a category, there are three options:
 
-Afterwards, it returns the grade for each subject (currently only math).
+1. homework
+2. quiz
+3. exam
+
+The program has 6 operable functions:
+
+### add
+
+This function lets you add grades to a class
+
+It first will ask for the number of assignments to add  
+For each assignment, it requires a class name, assignment name, assignment category, and assignment grade
+
+### add_class
+
+This function lets you add a new class to grades.json
+
+It requires class name as an input.
+
+### calculate
+
+This function return the grade average for a specified class.
+
+It requires class name as an input.
+
+### view
+
+This function lets you view the grades for a class.
+
+It requires class name as an input.
+
+### remove
+
+This function lets you remove an assignment from a class.
+
+It requires class name and assignment name as an input.
+
+### exit
+
+This function lets you exit the function.
